@@ -30,7 +30,6 @@ def translate_cpp_if(cpp_code):
                 condition = condition.replace('!', 'not ')
                 condition = condition.replace('true', 'True')
                 condition = condition.replace('false', 'False')
-                # Убираем лишние пробелы вокруг операторов
                 condition = ' '.join(condition.split())
                 result.append(f'if {condition}:')
 
@@ -58,7 +57,6 @@ def translate_cpp_if(cpp_code):
                 condition = condition.replace('!', 'not ')
                 condition = condition.replace('true', 'True')
                 condition = condition.replace('false', 'False')
-                # Убираем лишние пробелы вокруг операторов
                 condition = ' '.join(condition.split())
                 result.append(f'elif {condition}:')
 
@@ -211,9 +209,7 @@ def translate_cpp_cout(cpp_code):
             output_parts = []
             for part in parts[1:]:
                 part = part.strip().rstrip(';')
-                if part == 'endl':
-                    output_parts.append('"\\\\n"')
-                else:
+                if part != 'endl':
                     cleaned_part = part.strip()
                     output_parts.append(cleaned_part)
             if output_parts:
@@ -245,9 +241,7 @@ def translate_simple_line(line):
         output_parts = []
         for part in parts[1:]:
             part = part.strip()
-            if part == 'endl':
-                output_parts.append('"\\\\n"')
-            else:
+            if part != 'endl':
                 output_parts.append(part)
         return f'print({", ".join(output_parts)})'
 
