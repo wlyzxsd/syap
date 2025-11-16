@@ -1,6 +1,3 @@
-import re
-
-
 def translate_cpp_if(cpp_code):
     lines = cpp_code.split('\n')
     result = []
